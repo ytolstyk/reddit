@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :ensure_logged_in, only: [:destroy]
+
   def new
   end
 
@@ -10,7 +12,7 @@ class SessionsController < ApplicationController
     if user
       login_user!(user)
     else
-      flash.now[:errors] = user.errors.full_messages
+      flash.now[:errors] = ["User/password combination not found"]
       render :new
     end
   end

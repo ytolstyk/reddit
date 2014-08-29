@@ -1,0 +1,10 @@
+<h3>Hello, <%= current_user.username %></h3>
+
+<h4>Subs you moderate:</h4>
+<ul id="subs">
+  <% current_user.moderated_subs.each do |sub| %>
+    <li class="sub"><%= link_to sub.title, sub_url(sub) %></li>
+  <% end %>
+</ul>
+
+<%= "You don't moderate anything" if current_user.moderated_subs.empty? %>

@@ -25,4 +25,12 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !!current_user
   end
+  
+  def ensure_logged_in
+    redirect_to user_url(current_user) unless logged_in?
+  end
+  
+  def ensure_not_logged_in
+    redirect_to user_url(current_user) if logged_in?
+  end
 end

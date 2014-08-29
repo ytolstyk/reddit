@@ -1,0 +1,11 @@
+<h3>Subs</h3>
+
+<% if logged_in? %>
+  <%= link_to "Create sub", new_sub_url %>
+<% end %>
+
+<ul id="subs">
+<% @subs.each do |sub| %>
+  <li class="sub"><%= link_to sub.title, sub_url(sub) %></li>
+<% end %>
+</ul>

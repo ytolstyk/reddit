@@ -12,6 +12,10 @@
   <%= render partial: 'layouts/session' %>
 </div>
 
+<div id="navigation">
+  <%= render partial: 'layouts/navigation' %>  
+</div>
+
 <ul>
   <% flash[:errors].try(:each) do |error| %>
     <li><%= error %></li>
