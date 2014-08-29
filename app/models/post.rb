@@ -6,16 +6,17 @@
 #  title      :string(255)      not null
 #  url        :string(255)
 #  content    :text
-#  sub_id     :integer          not null
 #  author_id  :integer          not null
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class Post < ActiveRecord::Base
-  validates :title, :author_id, :sub_id, presence: true
+  validates :title, :author_id, presence: true
   
   validates_format_of :url, with: /\Ahttps?:\/\//i, allow_blank: true
+  
+  has_many :post_subs, inverse_of: :post
   
   belongs_to(
     :author,
@@ -24,10 +25,9 @@ class Post < ActiveRecord::Base
     primary_key: :id
   )
   
-  belongs_to(
-    :sub,
-    class_name: "Sub",
-    foreign_key: :sub_id,
-    primary_key: :id
+  has_many(
+    :subs,
+    through: :post_subs,
+    source: :sub
   )
 end

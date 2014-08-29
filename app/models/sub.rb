@@ -14,6 +14,8 @@ class Sub < ActiveRecord::Base
   validates :title, :moderator_id, presence: true
   validates :title, uniqueness: true
   
+  has_many :post_subs, inverse_of: :sub
+  
   belongs_to(
     :moderator,
     class_name: "User",
@@ -23,9 +25,7 @@ class Sub < ActiveRecord::Base
   
   has_many(
     :posts,
-    class_name: "Post",
-    foreign_key: :sub_id,
-    primary_key: :id,
-    dependent: :destroy
+    through: :post_subs,
+    source: :post
   )
 end

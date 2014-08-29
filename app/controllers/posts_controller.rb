@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :ensure_authored, only: [:edit, :update]
 
   def new
+    @subs = Sub.all.order(:title)
     @post = current_sub.posts.new
   end
   
@@ -18,6 +19,7 @@ class PostsController < ApplicationController
   end
   
   def edit
+    @subs = Sub.all.order(:title)
     current_post
   end
   
@@ -44,7 +46,7 @@ class PostsController < ApplicationController
   end
   
   def post_params
-    params.require(:post).permit(:title, :url, :content, :sub_id)
+    params.require(:post).permit(:title, :url, :content, sub_ids: [])
   end
   
   def current_post
