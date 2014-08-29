@@ -1,0 +1,11 @@
+#
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: reddit_development
+  pool: 5
+  host: localhost
+  username: appacademy
+  password:
+
+ 
