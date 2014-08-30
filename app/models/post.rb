@@ -30,4 +30,19 @@ class Post < ActiveRecord::Base
     through: :post_subs,
     source: :sub
   )
+  
+  has_many(
+    :comments,
+    class_name: "Comment",
+    foreign_key: :post_id,
+    primary_key: :id
+  )
+  
+  has_many(
+    :top_level_comments,
+    -> { where(parent_id: nil) },
+    class_name: "Comment",
+    foreign_key: :post_id,
+    primary_key: :id
+  )
 end

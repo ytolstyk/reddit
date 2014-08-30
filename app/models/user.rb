@@ -35,6 +35,13 @@ class User < ActiveRecord::Base
     dependent: :destroy
   )
   
+  has_many(
+    :comments,
+    class_name: "Comment",
+    foreign_key: :author_id,
+    primary_key: :id
+  )
+  
   def self.generate_session_token
     SecureRandom.urlsafe_base64(16)
   end

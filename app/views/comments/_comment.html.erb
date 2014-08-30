@@ -1,0 +1,12 @@
+<ul>
+  <li class="comment">
+    <%= link_to comment.content, comment_url(comment) %>
+     (<%= link_to comment.author.username, user_url(comment.author) %>)
+     
+    <%= render partial: "comments/form", locals: { post: comment.post, parent_id: comment.id } %>
+    
+    <% comment.children.each do |child| %>
+      <%= render partial: "comments/comment", locals: { comment: child } %>
+    <% end %>
+  </li>
+</ul>
